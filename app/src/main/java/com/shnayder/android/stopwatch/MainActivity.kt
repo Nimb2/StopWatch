@@ -61,18 +61,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //когда активность перестает быть видимой пользователю
-    override fun onStop() {
-        super.onStop()
+    //когда активность переходит на задний план, смена фокуса на другое приложение
+    override fun onPause() {
+        super.onPause()
         if (running) {
             saveOffset()
             stopwatch.stop()
         }
     }
 
-    //когда активность, ставшая невидимой, снова появляется на экране
-    override fun onRestart() {
-        super.onRestart()
+    //когда активность переходит на передний план
+    override fun onResume() {
+        super.onResume()
         if (running) {
             setBaseTime()
             stopwatch.start()
