@@ -61,6 +61,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //когда активность перестает быть видимой пользователю
+    override fun onStop() {
+        super.onStop()
+        if (running) {
+            saveOffset()
+            stopwatch.stop()
+        }
+    }
+
+    //когда активность, ставшая невидимой, снова появляется на экране
+    override fun onRestart() {
+        super.onRestart()
+        if (running) {
+            setBaseTime()
+            stopwatch.start()
+            offset = 0
+        }
+    }
+
     //помещение значений в объект Bundle (сохранение значений при повороте экрана)
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putLong(OFFSET_KEY, offset)
